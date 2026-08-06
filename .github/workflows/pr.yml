@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  norminette:
+    name: Norminette
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Run Norminette
+        uses: 42School/norminette@3.3.5
