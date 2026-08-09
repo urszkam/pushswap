@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/09 20:49:52 by urkamins          #+#    #+#             */
+/*   Updated: 2026/08/09 20:49:52 by urkamins         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 ** function appends the NUL-terminated string src to the end of dst. 
 ** It will append at most size - strlen(dst) - 1 bytes.

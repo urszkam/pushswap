@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/09 20:49:52 by urkamins          #+#    #+#             */
+/*   Updated: 2026/08/09 20:49:52 by urkamins         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 ** Allocates (with malloc(3)) and returns a copy of s1 with the characters
 ** specified in 'set' removed from the beginning and the end of the string

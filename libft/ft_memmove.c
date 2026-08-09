@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/09 20:49:52 by urkamins          #+#    #+#             */
+/*   Updated: 2026/08/09 20:59:55 by urkamins         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 ** Copies n characters from the object pointed to by src to the object 
 ** pointed to by dest. Both objects are reinterpreted as arrays 
@@ -17,7 +29,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	size_t			i;
 
 	if (!dest && !src)
-    	return (dest);
+		return (dest);
 	temp_d = (unsigned char *) dest;
 	temp_s = (unsigned char *) src;
 	i = 0;

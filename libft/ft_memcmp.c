@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/09 20:49:52 by urkamins          #+#    #+#             */
+/*   Updated: 2026/08/09 20:56:21 by urkamins         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /* The memcmp() function compares the first n bytes (each interpreted
 ** as unsigned char) of the memory areas s1 and s2.
 */
@@ -6,7 +18,7 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t			i;
+	size_t				i;
 	const unsigned char	*ptrs1;
 	const unsigned char	*ptrs2;
 
