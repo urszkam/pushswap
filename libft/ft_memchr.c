@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/09 12:26:49 by urkamins          #+#    #+#             */
-/*   Updated: 2026/08/09 20:55:09 by urkamins         ###   ########.fr       */
+/*   Created: 2026/08/09 20:49:52 by urkamins          #+#    #+#             */
+/*   Updated: 2026/08/09 20:49:52 by urkamins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+/* The memchr() function scans the initial n bytes of the memory area
+** pointed to by s for the first instance of c.  Both c and the bytes
+** of the memory area pointed to by s are interpreted as unsigned char. 
+*/
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "libft.h"
-# include "ft_printf.h"
+#include "libft.h"
 
-typedef struct s_stack
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int				num;
-	struct s_stack	*prev;
-	struct s_stack	*next;
-}	t_stack;
-
-#endif
+	while (n--)
+	{
+		if (*(unsigned char *)s == (unsigned char)c)
+			return ((void *)s);
+		s++;
+	}
+	return (NULL);
+}

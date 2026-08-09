@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/09 12:26:49 by urkamins          #+#    #+#             */
-/*   Updated: 2026/08/09 20:55:09 by urkamins         ###   ########.fr       */
+/*   Created: 2026/08/09 20:49:52 by urkamins          #+#    #+#             */
+/*   Updated: 2026/08/09 20:49:52 by urkamins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "libft.h"
-# include "ft_printf.h"
-
-typedef struct s_stack
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int				num;
-	struct s_stack	*prev;
-	struct s_stack	*next;
-}	t_stack;
+	unsigned int	len;
+	char			*d;
 
-#endif
+	if (!s || !f)
+		return (NULL);
+	len = ft_strlen(s);
+	d = (char *)malloc(sizeof(char) * len + 1);
+	if (!d)
+		return (NULL);
+	d[len] = 0;
+	while (len--)
+		d[len] = f(len, s[len]);
+	return (d);
+}

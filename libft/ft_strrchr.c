@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/09 12:26:49 by urkamins          #+#    #+#             */
-/*   Updated: 2026/08/09 20:55:09 by urkamins         ###   ########.fr       */
+/*   Created: 2026/08/09 20:49:52 by urkamins          #+#    #+#             */
+/*   Updated: 2026/08/09 20:49:52 by urkamins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "libft.h"
-# include "ft_printf.h"
-
-typedef struct s_stack
+char	*ft_strrchr(const char *s, int c)
 {
-	int				num;
-	struct s_stack	*prev;
-	struct s_stack	*next;
-}	t_stack;
+	size_t	idx;
 
-#endif
+	idx = ft_strlen(s);
+	while (idx > 0 && s[idx] != c)
+		idx--;
+	if (s[idx] == c)
+		return ((char *)s + idx);
+	return (0);
+}

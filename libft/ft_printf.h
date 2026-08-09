@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/09 12:26:49 by urkamins          #+#    #+#             */
-/*   Updated: 2026/08/09 20:55:09 by urkamins         ###   ########.fr       */
+/*   Created: 2026/08/09 20:49:52 by urkamins          #+#    #+#             */
+/*   Updated: 2026/08/09 20:49:52 by urkamins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-# include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
-# include "libft.h"
-# include "ft_printf.h"
+# include <stdarg.h>
+# include <stdint.h>
 
-typedef struct s_stack
+int	ft_printf(const char *format, ...);
+int	put_c(int c);
+int	put_p(void *ptr, int flags);
+int	put_x(unsigned int n, int flags, char specifier);
+int	put_n(long nb, int flags, char specifier);
+int	put_s(char *s);
+
+typedef enum e_bool
 {
-	int				num;
-	struct s_stack	*prev;
-	struct s_stack	*next;
-}	t_stack;
+	false,
+	true
+}	t_bool;
 
 #endif
