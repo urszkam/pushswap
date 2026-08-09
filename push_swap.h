@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urkamins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 12:26:49 by urkamins          #+#    #+#             */
-/*   Updated: 2026/08/09 12:27:15 by urkamins         ###   ########.fr       */
+/*   Updated: 2026/08/09 12:28:54 by urkamins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 typedef struct s_stack
 {
 	int					num;
-	struct s_content	*prev;
-	struct s_content	*next;
+	struct s_stack	*prev;
+	struct s_stack	*next;
 }	t_stack;
 
 int	extract_flags(char **argv, int disorder, int *bench);
