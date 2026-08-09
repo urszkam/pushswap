@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 
     if argc > 1 
     {
-        if (!validate_list(argv))
+        if (!validate_list(++argv))
         {
             print_err();
             return 1;
