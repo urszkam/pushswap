@@ -6,7 +6,7 @@
 /*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 11:49:22 by urkamins          #+#    #+#             */
-/*   Updated: 2026/08/09 12:12:44 by urkamins         ###   ########.fr       */
+/*   Updated: 2026/08/09 12:28:11 by urkamins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	main(int argc, char **argv)
 	double	disorder;
 	int		algorithm;
 	int		bench;
-	stack_t	*stack_a;
-	ops_t	*ops;
+	int		*ops;
+	t_stack	*stack_a;
 
 	if (argc > 1)
 	{
