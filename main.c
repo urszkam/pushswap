@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -8,18 +8,18 @@
 /*   Created: 2026/08/09 11:49:22 by urkamins          #+#    #+#             */
 /*   Updated: 2026/08/09 21:42:34 by urkamins         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "push_swap.h"
 
-static void	print_stack(t_stack *stack)
-{
-	while (stack)
-	{
-		ft_printf("%d\n", stack->num);
-		stack = stack->next;
-	}
-}
+// static void	print_stack(t_stack *stack)
+// {
+// 	while (stack)
+// 	{
+// 		ft_printf("%d\n", stack->num);
+// 		stack = stack->next;
+// 	}
+// }
 
 void	sort_stack(t_stack **stack_a, double disorder, char *algorithm)
 {
@@ -35,11 +35,11 @@ void	sort_stack(t_stack **stack_a, double disorder, char *algorithm)
 
 int	main(int argc, char **argv)
 {
-	double	disorder;
+	// double	disorder;
 	char	*algorithm_flag;
 	int		bench;
 	// int		*ops;
-	t_stack	*stack_a;
+	// t_stack	*stack_a;
 
 	if (argc > 1)
 	{
@@ -50,12 +50,12 @@ int	main(int argc, char **argv)
 		// 	return (1);
 		// }
 		extract_flags(&argv, &algorithm_flag, &bench);
-		stack_a = populate_stack(argv);
+		// stack_a = populate_stack(argv);
 		// print_stack(stack_a);
-		disorder = compute_disorder(stack_a);
-		sort_stack(&stack_a, disorder, algorithm_flag);
-		if (bench)
-			print_bench(disorder, algorithm_flag);
+		// disorder = compute_disorder(stack_a);
+		// sort_stack(&stack_a, disorder, algorithm_flag);
+		// if (bench)
+		// 	print_bench(disorder, algorithm_flag);
 		// free_stack(&stack_a);
 	}
 	return (0);
