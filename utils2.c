@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/10 23:02:40 by urkamins          #+#    #+#             */
+/*   Updated: 2026/08/10 23:02:40 by urkamins         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int is_flag(char *s)
+int	is_flag(char *s)
 {
-    return (!strncmp(s, "--", 2));
+	return (!strncmp(s, "--", 2));
 }
 
-int equals(char *s1, char *s2)
+int	equals(char *s1, char *s2)
 {
 	size_t	i;
 
