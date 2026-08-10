@@ -2,12 +2,13 @@ LIB_DIR 	= ./libft
 LIBFT 		= libft.a
 LIB_PATH	= ${LIB_DIR}/${LIBFT}
 
-OUT_NAME = push_swap
-SRCS = main.c
-OBJS = ${SRCS:.c=.o}
-HEADER_DIR = ./
-CFLAGS = -Wall -Wextra -Werror
-CPPFLAGS = -I ${HEADER_DIR} -I ${LIB_DIR}
+OUT_NAME	= push_swap
+SRCS		= main.c stack_init.c utils.c utils2.c print_bench.c \
+			sort_complex.c sort_medium.c sort_simple.c
+OBJS		= ${SRCS:.c=.o}
+HEADER_DIR	= ./
+CFLAGS		= -Wall -Wextra -Werror
+CPPFLAGS	= -I ${HEADER_DIR} -I ${LIB_DIR}
 
 %.o: %.c
 	@cc -c ${CFLAGS} ${CPPFLAGS} $< -o $@
