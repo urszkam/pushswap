@@ -12,6 +12,21 @@
 
 #include "push_swap.h"
 
+int	is_flag(char *s)
+{
+	return (!strncmp(s, "--", 2));
+}
+
+int	equals(char *s1, char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] == (unsigned char)s2[i]);
+}
+
 void	extract_flags(char ***argv, char **algorithm, int *bench)
 {
 	int		idx;
@@ -51,11 +66,18 @@ double	compute_disorder(t_stack *stack_a)
 		while (inner)
 		{
 			total_pairs += 1;
-			if (stack_a->num > inner->num)
+			if (*(int *)stack_a->content > *(int *)inner->content)
 				mistakes += 1;
 			inner = inner->next;
 		}
 		stack_a = stack_a->next;
 	}
 	return ((double) mistakes / total_pairs);
+}
+
+void	free_stack(t_stack **stack)
+{
+	if (!stack)
+		return ;
+	ft_lstclear(stack, free);
 }
