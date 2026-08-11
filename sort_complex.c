@@ -12,8 +12,8 @@
 
 #include "push_swap.h"
 
-void	sort_complex(t_stack **stack_a)
+void	sort_complex(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
 {
 	ft_printf("simple\n");
-	(void) stack_a;
+	pb(stack_b, stack_a, meta);
 }

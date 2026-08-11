@@ -19,32 +19,48 @@
 # include "libft.h"
 # include "ft_printf.h"
 
-typedef struct s_stack
-{
-	int				num;
-	struct s_stack	*prev;
-	struct s_stack	*next;
-}	t_stack;
+typedef t_list	t_stack;
 
-typedef struct s_ops
+typedef struct s_meta
 {
-	char			*op;
-	int				counter;
-	struct s_stack	*next;
-}	t_ops;
+	int	pa;
+	int	pb;
+	int	sa;
+	int	sb;
+	int	ss;
+	int	ra;
+	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int	rrr;
+	int	total;
+}	t_meta;
 
 void	extract_flags(char ***argv, char **algorithm, int *bench);
-void	print_bench(double disorder, char *algorithm);
-void	sort_simple(t_stack **stack_a);
-void	sort_medium(t_stack **stack_a);
-void	sort_complex(t_stack **stack_a);
+void	print_bench(double disorder, char *algorithm, t_meta meta);
+void	sort_simple(t_stack **stack_a, t_stack **stack_b, t_meta *meta);
+void	sort_medium(t_stack **stack_a, t_stack **stack_b, t_meta *meta);
+void	sort_complex(t_stack **stack_a, t_stack **stack_b, t_meta *meta);
+
+void	pa(t_stack **stack_a, t_stack **stack_b, t_meta *meta);
+void	pb(t_stack **stack_b, t_stack **stack_a, t_meta *meta);
+void	sa(t_stack **stack_a, t_meta *meta);
+void	sb(t_stack **stack_b, t_meta *meta);
+void	ss(t_stack **stack_a, t_stack **stack_b, t_meta *meta);
+void	ra(t_stack **stack_a, t_meta *meta);
+void	rb(t_stack **stack_b, t_meta *meta);
+void	rr(t_stack **stack_a, t_stack **stack_b, t_meta *meta);
+void	rra(t_stack **stack_a, t_meta *meta);
+void	rrb(t_stack **stack_b, t_meta *meta);
+void	rrr(t_stack **stack_a, t_stack **stack_b, t_meta *meta);
 
 int		is_flag(char *s);
 int		equals(char *s1, char *s2);
 
 double	compute_disorder(t_stack *stack_a);
 
-// t_stack	*populate_stack(char **argv);
-// void	free_stack(t_stack **stack);
+t_stack	*populate_stack(char **argv);
+void	free_stack(t_stack **stack);
 
 #endif
