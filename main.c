@@ -27,6 +27,8 @@ void	sort_stack(
 {
 	t_stack	*stack_b;
 
+	if (!stack_a || !*stack_a || !(*stack_a)->next || disorder == 0)
+		return ;
 	stack_b = NULL;
 	if (equals(algorithm, "simple")
 		|| (equals(algorithm, "adaptive") && disorder <= 0.2))

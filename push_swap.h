@@ -57,6 +57,8 @@ void	rrr(t_stack **stack_a, t_stack **stack_b, t_meta *meta);
 
 int		is_flag(char *s);
 int		equals(char *s1, char *s2);
+int		lt(void *num1, void *num2);
+int		eq(void *num1, void *num2);
 
 double	compute_disorder(t_stack *stack_a);
 
