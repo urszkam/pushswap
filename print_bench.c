@@ -42,37 +42,25 @@ void	print_algorithm(char *algorithm, double disorder)
 		ft_putendl_fd("O(n log n)", 2);
 }
 
-void	print_total(t_meta meta)
+static void	print_operation(char *name, int count)
 {
-	ft_putstr_fd("[bench] total_ops: ", 2);
-	ft_putnbr_fd(meta.total, 2);
-	ft_putendl_fd("", 2);
+	ft_putstr_fd(name, 2);
+	ft_putnbr_fd(count, 2);
 }
 
 void	print_operations(t_meta meta)
 {
-	ft_putstr_fd("[bench] sa: ", 2);
-	ft_putnbr_fd(meta.sa, 2);
-	ft_putstr_fd(" sb: ", 2);
-	ft_putnbr_fd(meta.sb, 2);
-	ft_putstr_fd(" ss: ", 2);
-	ft_putnbr_fd(meta.ss, 2);
-	ft_putstr_fd(" pa: ", 2);
-	ft_putnbr_fd(meta.pa, 2);
-	ft_putstr_fd(" pb: ", 2);
-	ft_putnbr_fd(meta.pb, 2);
-	ft_putstr_fd("\n[bench] ra: ", 2);
-	ft_putnbr_fd(meta.ra, 2);
-	ft_putstr_fd(" rb: ", 2);
-	ft_putnbr_fd(meta.rb, 2);
-	ft_putstr_fd(" rr: ", 2);
-	ft_putnbr_fd(meta.rr, 2);
-	ft_putstr_fd(" rra: ", 2);
-	ft_putnbr_fd(meta.rra, 2);
-	ft_putstr_fd(" rrb: ", 2);
-	ft_putnbr_fd(meta.rrb, 2);
-	ft_putstr_fd(" rrr: ", 2);
-	ft_putnbr_fd(meta.rrr, 2);
+	print_operation("[bench] sa: ", meta.sa);
+	print_operation(" sb: ", meta.sb);
+	print_operation(" ss: ", meta.ss);
+	print_operation(" pa: ", meta.pa);
+	print_operation(" pb: ", meta.pb);
+	print_operation("\n[bench] ra: ", meta.ra);
+	print_operation(" rb: ", meta.rb);
+	print_operation(" rr: ", meta.rr);
+	print_operation(" rra: ", meta.rra);
+	print_operation(" rrb: ", meta.rrb);
+	print_operation(" rrr: ", meta.rrr);
 	ft_putendl_fd("", 2);
 }
 
@@ -80,6 +68,7 @@ void	print_bench(double disorder, char *algorithm, t_meta meta)
 {
 	print_disorder(disorder);
 	print_algorithm(algorithm, disorder);
-	print_total(meta);
+	print_operation("[bench] total_ops: ", meta.total);
+	ft_putendl_fd("", 2);
 	print_operations(meta);
 }
