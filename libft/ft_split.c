@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pausulzy <pausulzy@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 20:49:52 by urkamins          #+#    #+#             */
-/*   Updated: 2026/08/09 20:49:52 by urkamins         ###   ########.fr       */
+/*   Updated: 2026/08/13 11:44:34 by pausulzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static size_t	count_words(char const *s, char c)
 	i = 0;
 	while (s[i])
 	{
-		if ((i == 0 && s[i] != c)
-			|| (i > 0 && s[i - 1] == c && s[i] != c))
+		if ((i == 0 && s[i] != c) || (i > 0 && s[i - 1] == c && s[i] != c))
 			counter++;
 		i++;
 	}
@@ -50,12 +49,12 @@ static char	**create_arr(char const *s, char c, size_t arr_len, char **arr)
 		while (s[word_len] && s[word_len] != c)
 			word_len++;
 		arr[i] = ft_substr(s, 0, word_len);
-        if (!arr[i])
-        {
-            ft_free(arr, i);
-            return (NULL);
-        }
-        s += word_len;
+		if (!arr[i])
+		{
+			ft_free(arr, i);
+			return (NULL);
+		}
+		s += word_len;
 		i++;
 	}
 	arr[i] = 0;
