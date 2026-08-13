@@ -72,25 +72,24 @@ int	main(int argc, char **argv)
 	t_meta	meta;
 	t_stack	*stack_a;
 
-	if (argc > 1)
-	{
-		ft_bzero(&meta, sizeof(t_meta));
-		argv++;
-		// if (!validate_list(argv)) //TODO
-		// {
-		// 	ft_putendl_fd("Error", 2);
-		// 	return (1);
-		// }
-		extract_flags(&argv, &algorithm_flag, &bench);
-		stack_a = populate_stack(argv);
-		if (!stack_a)
-			return (1);
-		print_stack(stack_a);
-		disorder = compute_disorder(stack_a);
-		sort_stack(&stack_a, disorder, algorithm_flag, &meta);
-		if (bench)
-			print_bench(disorder, algorithm_flag, meta);
-		free_stack(&stack_a);
-	}
+	if (argc == 1)
+		return (1);
+	ft_bzero(&meta, sizeof(t_meta));
+	argv++; // REMOVE WHEN THE LINE BELOW IS UNCOMMENTED
+	// if (!validate_list(++argv)) //TODO
+	// {
+	// 	ft_putendl_fd("Error", 2);
+	// 	return (1);
+	// }
+	extract_flags(&argv, &algorithm_flag, &bench);
+	stack_a = populate_stack(argv);
+	if (!stack_a)
+		return (1);
+	print_stack(stack_a);
+	disorder = compute_disorder(stack_a);
+	sort_stack(&stack_a, disorder, algorithm_flag, &meta);
+	if (bench)
+		print_bench(disorder, algorithm_flag, meta);
+	free_stack(&stack_a);
 	return (0);
 }
