@@ -1,5 +1,30 @@
 ## Push_swap
 
+### Program workflow
+
+```mermaid
+flowchart LR
+    A[Input] --> B{Are there parameters?}
+
+    B -->|Yes| C[Extract <code>args</code> for stack]
+    B -->|No| D[End; display nothing]
+
+    subgraph DIGITS_CHECK[ ]
+        E{Only digits?} -->|No| X[End; display error]
+    end
+
+    C --> E
+    E -->|Yes| G{Within <code>int<c/ode> range?}
+
+    G -->|No| X
+    G -->|Yes| I{Duplicates present?}
+
+    I -->|Yes| X
+    I -->|No| K[Create doubly linked list; insert <code>int</code>s as nodes]
+
+    K --> L[Initialize empty doubly linked list]
+```
+
 ### Setting up a visualizer
 
 Build a [push_swap visualizer](https://github.com/o-reo/push_swap_visualizer) to monitor program activity, changing a few things to make sure it works on more modern versions of Ubuntu (disabling one warning and correcting the `cmake` call path):
