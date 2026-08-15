@@ -60,6 +60,8 @@ double	compute_disorder(t_stack *stack_a)
 
 	mistakes = 0;
 	total_pairs = 0;
+	if (!stack_a->next)
+		return (0);
 	while (stack_a->next)
 	{
 		inner = stack_a->next;
@@ -73,11 +75,4 @@ double	compute_disorder(t_stack *stack_a)
 		stack_a = stack_a->next;
 	}
 	return ((double) mistakes / total_pairs);
-}
-
-void	free_stack(t_stack **stack)
-{
-	if (!stack)
-		return ;
-	ft_lstclear(stack, free);
 }

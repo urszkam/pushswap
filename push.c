@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	push(t_stack **stack1, t_stack **stack2)
+static void	push(t_stack **stack1, t_stack **stack2)
 {
 	t_stack	*first2;
 
@@ -38,4 +38,12 @@ void	pb(t_stack **stack_b, t_stack **stack_a, t_meta *meta)
 	ft_printf("pb\n");
 	meta->total++;
 	meta->pb++;
+}
+
+void    complex_push(t_stack **from, t_stack **to, t_meta *meta, int to_b)
+{
+    if (to_b)
+        pb(to, from, meta);
+    else
+        pa(to, from, meta);
 }

@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	print_disorder(double disorder)
+static void	print_disorder(double disorder)
 {
 	int	whole_disorder;
 
@@ -26,7 +26,7 @@ void	print_disorder(double disorder)
 	ft_putendl_fd("%", 2);
 }
 
-void	print_algorithm(char *algorithm, double disorder)
+static void	print_algorithm(char *algorithm, double disorder)
 {
 	ft_putstr_fd("[bench] strategy: ", 2);
 	ft_putchar_fd(ft_toupper(*algorithm), 2);
@@ -48,7 +48,7 @@ static void	print_operation(char *name, int count)
 	ft_putnbr_fd(count, 2);
 }
 
-void	print_operations(t_meta meta)
+static void	print_operations(t_meta meta)
 {
 	print_operation("[bench] sa: ", meta.sa);
 	print_operation(" sb: ", meta.sb);

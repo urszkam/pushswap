@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	swap(t_stack **stack)
+static void	swap(t_stack **stack)
 {
 	t_stack	*first;
 	t_stack	*second;
@@ -49,4 +49,12 @@ void	ss(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
 	ft_printf("ss\n");
 	meta->total++;
 	meta->ss++;
+}
+
+void    complex_swap(t_stack **stack, t_meta *meta, int to_b)
+{
+    if (to_b)
+        sb(stack, meta);
+    else
+        sa(stack, meta);
 }
