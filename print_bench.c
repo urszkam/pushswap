@@ -34,7 +34,7 @@ void	print_algorithm(char *algorithm, double disorder)
 	ft_putstr_fd(" / ", 2);
 	if (equals(algorithm, "simple")
 		|| (equals(algorithm, "adaptive") && disorder <= 0.2))
-		ft_putendl_fd("O(n^2)", 2);
+		ft_putendl_fd("O(n²)", 2);
 	else if (equals(algorithm, "medium")
 		|| (equals(algorithm, "adaptive") && disorder < 0.5))
 		ft_putendl_fd("O(n√n)", 2);
