@@ -51,10 +51,10 @@ void	ss(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
 	meta->ss++;
 }
 
-void    complex_swap(t_stack **stack, t_meta *meta, int to_b)
+void	complex_swap(t_stack **stack, t_meta *meta, int to_b)
 {
-    if (to_b)
-        sb(stack, meta);
-    else
-        sa(stack, meta);
+	if (to_b)
+		sb(stack, meta);
+	else
+		sa(stack, meta);
 }

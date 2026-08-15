@@ -18,7 +18,7 @@ static void	compute_complex_metadata(t_complex_meta *meta, t_stack *stack)
 	meta->iterations = compute_iterations(meta->len);
 	meta->to_b = 1;
 	meta->run_size = 2;
-	meta->remaining_b = meta->len /2;
+	meta->remaining_b = meta->len / 2;
 	meta->remaining_a = meta->len - meta->remaining_b;
 }
 
@@ -53,9 +53,9 @@ static void	merge_sort_iteration(t_stack **stack_a, t_stack **stack_b,
 	while (complex->remaining_a > 0 || complex->remaining_b > 0)
 	{
 		complex->current_a = min(max(complex->remaining_a, 0),
-			complex->run_size / 2);
+				complex->run_size / 2);
 		complex->current_b = min(max(complex->remaining_b, 0),
-			complex->run_size / 2);
+				complex->run_size / 2);
 		if (!complex->iterations)
 			complex->to_b = 0;
 		else

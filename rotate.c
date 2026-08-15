@@ -51,10 +51,10 @@ void	rr(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
 	meta->rr++;
 }
 
-void    complex_rotate(t_stack **stack, t_meta *meta, int to_b)
+void	complex_rotate(t_stack **stack, t_meta *meta, int to_b)
 {
-    if (to_b)
-        rb(stack, meta);
-    else
-        ra(stack, meta);
+	if (to_b)
+		rb(stack, meta);
+	else
+		ra(stack, meta);
 }

@@ -76,11 +76,11 @@ int		min(int num1, int num2);
 int		max(int num1, int num2);
 int		compute_iterations(int size);
 
-void    complex_push(t_stack **from, t_stack **to,
-	t_meta *meta, int to_b);
-void    complex_swap(t_stack **stack, t_meta *meta, int to_b);
-void    complex_rotate(t_stack **stack, t_meta *meta, int to_b);
-void    complex_reverse_rotate(t_stack **stack, t_meta *meta, int to_b);
+void	complex_push(t_stack **from, t_stack **to,
+			t_meta *meta, int to_b);
+void	complex_swap(t_stack **stack, t_meta *meta, int to_b);
+void	complex_rotate(t_stack **stack, t_meta *meta, int to_b);
+void	complex_reverse_rotate(t_stack **stack, t_meta *meta, int to_b);
 
 double	compute_disorder(t_stack *stack_a);
 

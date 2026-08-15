@@ -40,10 +40,10 @@ void	pb(t_stack **stack_b, t_stack **stack_a, t_meta *meta)
 	meta->pb++;
 }
 
-void    complex_push(t_stack **from, t_stack **to, t_meta *meta, int to_b)
+void	complex_push(t_stack **from, t_stack **to, t_meta *meta, int to_b)
 {
-    if (to_b)
-        pb(to, from, meta);
-    else
-        pa(to, from, meta);
+	if (to_b)
+		pb(to, from, meta);
+	else
+		pa(to, from, meta);
 }
