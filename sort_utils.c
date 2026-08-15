@@ -17,6 +17,11 @@ int	lt(void *num1, void *num2)
 	return (*(int *)num1 < *(int *)num2);
 }
 
+int	gt(void *num1, void *num2)
+{
+	return (*(int *)num1 > *(int *)num2);
+}
+
 int	eq(void *num1, void *num2)
 {
 	return (*(int *)num1 == *(int *)num2);

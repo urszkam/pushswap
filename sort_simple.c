@@ -12,54 +12,33 @@
 
 #include "push_swap.h"
 
-int	is_max_closer_to_start(t_stack *stack_b, void *max)
+static int	find_index(t_stack *stack, void *target)
 {
-	int	size;
-	int	idx_from_start;
-	int	idx_from_end;
+	int	index;
 
-	idx_from_start = 0;
-	size = ft_lstsize(stack_b);
-	while (stack_b && !eq(max, stack_b->content))
+	index = 0;
+	while (stack && !eq(target, stack->content))
 	{
-		idx_from_start++;
-		stack_b = stack_b->next;
+		stack = stack->next;
+		index++;
 	}
-	idx_from_end = size - idx_from_start;
-	return (idx_from_start < idx_from_end);
+	return (index);
 }
 
-void	order_stack(t_stack **stack_b, t_meta *meta, void *max)
-{
-	void	(*func)(t_stack **, t_meta *);
-
-	if (eq(max, (*stack_b)->content))
-		return ;
-	if (is_max_closer_to_start(*stack_b, max))
-		func = rb;
-	else
-		func = rrb;
-	while (!eq(max, (*stack_b)->content))
-		func(stack_b, meta);
-}
-
-static int	find_target(t_stack *stack_b, int number)
+static int	find_target(t_stack *stack_b, void *number, void *max)
 {
 	t_stack	*previous;
 	int		index;
-	int		previous_value;
-	int		current_value;
 
 	previous = ft_lstlast(stack_b);
 	index = 0;
 	while (stack_b)
 	{
-		previous_value = *(int *)previous->content;
-		current_value = *(int *)stack_b->content;
-		if ((previous_value > current_value
-				&& number < previous_value && number > current_value)
-			|| (previous_value < current_value
-				&& (number > current_value || number < previous_value)))
+		if ((lt(number, previous->content)
+				&& gt(number, stack_b->content))
+			|| (eq(max, stack_b->content)
+				&& (gt(number, stack_b->content)
+					|| lt(number, previous->content))))
 			return (index);
 		previous = stack_b;
 		stack_b = stack_b->next;
@@ -68,7 +47,7 @@ static int	find_target(t_stack *stack_b, int number)
 	return (0);
 }
 
-static void	rotate_to_target(t_stack **stack_b, int index, t_meta *meta)
+static void	rotate_to_value(t_stack **stack_b, int index, t_meta *meta)
 {
 	int	size;
 
@@ -93,13 +72,14 @@ void	sort_simple(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
 	pb(stack_b, stack_a, meta);
 	while (*stack_a)
 	{
-		target = find_target(*stack_b, *(int *)(*stack_a)->content);
-		rotate_to_target(stack_b, target, meta);
+		target = find_target(*stack_b, (*stack_a)->content, max);
+		rotate_to_value(stack_b, target, meta);
 		if (lt(max, (*stack_a)->content))
 			max = (*stack_a)->content;
 		pb(stack_b, stack_a, meta);
 	}
-	order_stack(stack_b, meta, max);
+	target = find_index(*stack_b, max);
+	rotate_to_value(stack_b, target, meta);
 	while (*stack_b)
 		pa(stack_a, stack_b, meta);
 }
