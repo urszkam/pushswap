@@ -6,7 +6,7 @@
 /*   By: pausulzy <pausulzy@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 15:11:05 by pausulzy          #+#    #+#             */
-/*   Updated: 2026/08/17 15:11:06 by pausulzy         ###   ########.fr       */
+/*   Updated: 2026/08/17 15:26:26 by pausulzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int	check_digits(char **argv)
 	}
 	return (1);
 }
+
 // Confirm all entries are within int range
 static int	check_range(char **argv)
 {
@@ -64,6 +65,7 @@ static int	check_range(char **argv)
 	}
 	return (1);
 }
+
 // Confirm no duplicates present
 static int	check_repeats(char **argv)
 {
