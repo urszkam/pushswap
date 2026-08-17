@@ -6,7 +6,7 @@
 /*   By: pausulzy <pausulzy@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:02:40 by urkamins          #+#    #+#             */
-/*   Updated: 2026/08/13 14:42:23 by pausulzy         ###   ########.fr       */
+/*   Updated: 2026/08/18 10:05:07 by pausulzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,8 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	ft_bzero(&meta, sizeof(t_meta));
-	argv++; // REMOVE WHEN THE LINE BELOW IS UNCOMMENTED
-	// if (!validate_list(++argv)) //TODO
-	// {
-	// 	ft_putendl_fd("Error", 2);
-	// 	return (1);
-	// }
+	if (!validate_list(argc, argv))
+		return (1);
 	extract_flags(&argv, &algorithm_flag, &bench);
 	stack_a = populate_stack(argv);
 	if (!stack_a)

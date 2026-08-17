@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pausulzy <pausulzy@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 12:26:49 by urkamins          #+#    #+#             */
-/*   Updated: 2026/08/09 21:37:19 by urkamins         ###   ########.fr       */
+/*   Updated: 2026/08/17 15:10:47 by pausulzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ void	complex_rotate(t_stack **stack, t_meta *meta, int to_b);
 void	complex_reverse_rotate(t_stack **stack, t_meta *meta, int to_b);
 
 double	compute_disorder(t_stack *stack_a);
+int		validate_list(int argc, char **argv);
 
 #endif
