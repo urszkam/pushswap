@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   complex_sort_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,38 +12,15 @@
 
 #include "push_swap.h"
 
-static void	push(t_stack **stack1, t_stack **stack2)
+int	compute_iterations(int size)
 {
-	t_stack	*first2;
+	int	iterations;
 
-	if (!stack1 || !stack2 || !*stack2)
-		return ;
-	first2 = *stack2;
-	*stack2 = first2->next;
-	first2->next = *stack1;
-	*stack1 = first2;
-}
-
-void	pa(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
-{
-	push(stack_a, stack_b);
-	ft_printf("pa\n");
-	meta->total++;
-	meta->pa++;
-}
-
-void	pb(t_stack **stack_b, t_stack **stack_a, t_meta *meta)
-{
-	push(stack_b, stack_a);
-	ft_printf("pb\n");
-	meta->total++;
-	meta->pb++;
-}
-
-void	complex_push(t_stack **from, t_stack **to, t_meta *meta, int to_b)
-{
-	if (to_b)
-		pb(to, from, meta);
-	else
-		pa(to, from, meta);
+	iterations = 0;
+	while (size > 1)
+	{
+		iterations++;
+		size = (size + 1) / 2;
+	}
+	return (iterations);
 }

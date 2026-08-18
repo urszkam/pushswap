@@ -37,6 +37,18 @@ typedef struct s_meta
 	int	total;
 }	t_meta;
 
+typedef struct s_complex_meta
+{
+	int	iterations;
+	int	run_size;
+	int	len;
+	int	to_b;
+	int	remaining_a;
+	int	remaining_b;
+	int	current_a;
+	int	current_b;
+}	t_complex_meta;
+
 void	extract_flags(char ***argv, char **algorithm, int *bench);
 void	print_bench(double disorder, char *algorithm, t_meta meta);
 void	sort_simple(t_stack **stack_a, t_stack **stack_b, t_meta *meta);
@@ -60,10 +72,16 @@ int		equals(char *s1, char *s2);
 int		lt(void *num1, void *num2);
 int		gt(void *num1, void *num2);
 int		eq(void *num1, void *num2);
+int		min(int num1, int num2);
+int		max(int num1, int num2);
+int		compute_iterations(int size);
+
+void	complex_push(t_stack **from, t_stack **to,
+			t_meta *meta, int to_b);
+void	complex_swap(t_stack **stack, t_meta *meta, int to_b);
+void	complex_rotate(t_stack **stack, t_meta *meta, int to_b);
+void	complex_reverse_rotate(t_stack **stack, t_meta *meta, int to_b);
 
 double	compute_disorder(t_stack *stack_a);
-
-t_stack	*populate_stack(char **argv);
-void	free_stack(t_stack **stack);
 
 #endif

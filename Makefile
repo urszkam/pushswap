@@ -5,7 +5,7 @@ LIB_PATH	= ${LIB_DIR}/${LIBFT}
 OUT_NAME	= push_swap
 SRCS		= main.c utils.c sort_utils.c print_bench.c \
 			sort_complex.c sort_medium.c sort_simple.c push.c \
-			swap.c rotate.c rotate_reverse.c
+			swap.c rotate.c rotate_reverse.c complex_sort_utils.c
 OBJS		= ${SRCS:.c=.o}
 HEADER_DIR	= ./
 CFLAGS		= -Wall -Wextra -Werror

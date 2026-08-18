@@ -21,7 +21,14 @@ static void	print_stack(t_stack *stack)
 	}
 }
 
-t_stack	*populate_stack(char **argv)
+static void	free_stack(t_stack **stack)
+{
+	if (!stack)
+		return ;
+	ft_lstclear(stack, free);
+}
+
+static t_stack	*populate_stack(char **argv)
 {
 	t_stack	*stack;
 	t_stack	*node;
@@ -45,7 +52,7 @@ t_stack	*populate_stack(char **argv)
 	return (stack);
 }
 
-void	sort_stack(t_stack **stack_a, double disorder, char *algorithm,
+static void	sort_stack(t_stack **stack_a, double disorder, char *algorithm,
 		t_meta *meta)
 {
 	t_stack	*stack_b;
@@ -73,7 +80,7 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 
 	if (argc == 1)
-		return (1);
+		return (0);
 	ft_bzero(&meta, sizeof(t_meta));
 	argv++; // REMOVE WHEN THE LINE BELOW IS UNCOMMENTED
 	// if (!validate_list(++argv)) //TODO
@@ -85,11 +92,11 @@ int	main(int argc, char **argv)
 	stack_a = populate_stack(argv);
 	if (!stack_a)
 		return (1);
-	print_stack(stack_a);
 	disorder = compute_disorder(stack_a);
 	sort_stack(&stack_a, disorder, algorithm_flag, &meta);
 	if (bench)
 		print_bench(disorder, algorithm_flag, meta);
+	print_stack(stack_a);
 	free_stack(&stack_a);
 	return (0);
 }

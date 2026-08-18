@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	rotate_reverse(t_stack **stack)
+static void	rotate_reverse(t_stack **stack)
 {
 	t_stack	*last;
 	t_stack	*penultimate;
@@ -51,4 +51,12 @@ void	rrr(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
 	ft_printf("rrr\n");
 	meta->total++;
 	meta->rrr++;
+}
+
+void	complex_rotate_reverse(t_stack **stack, t_meta *meta, int to_b)
+{
+	if (to_b)
+		rrb(stack, meta);
+	else
+		rra(stack, meta);
 }
