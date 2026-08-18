@@ -3,17 +3,9 @@
 /*                                                        :::      ::::::::   */
 /*   sort_medium.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pausulzy <pausulzy@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:02:40 by urkamins          #+#    #+#             */
-/*   Updated: 2026/08/10 23:02:40 by urkamins         ###   ########.fr       */
+/*   Updated: 2026/08/18 10:02:35 by pausulzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "push_swap.h"
-
-void	sort_medium(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
-{
-	ft_printf("simple\n");
-	rr(stack_a, stack_b, meta);
-}
