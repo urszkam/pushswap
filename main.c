@@ -81,14 +81,15 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 		return (0);
-	ft_bzero(&meta, sizeof(t_meta));
-	if (!validate_list(argc, ++argv))
-		return (1);
+	argv++;
 	extract_flags(&argv, &algorithm_flag, &bench);
+	if (!validate_list(argv))
+		return (1);
 	stack_a = populate_stack(argv);
 	if (!stack_a)
 		return (1);
 	disorder = compute_disorder(stack_a);
+	ft_bzero(&meta, sizeof(t_meta));
 	sort_stack(&stack_a, disorder, algorithm_flag, &meta);
 	if (bench)
 		print_bench(disorder, algorithm_flag, meta);

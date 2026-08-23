@@ -12,31 +12,8 @@
 
 #include "push_swap.h"
 
-// Filter flags from argv
-static void	filter_flags(int argc, char **argv)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < argc - 1)
-	{
-		if ((ft_strlen(argv[i]) != 7 || ft_strncmp(argv[i], "--bench", 7) != 0)
-			&& (ft_strlen(argv[i]) != 8 || ft_strncmp(argv[i], "--simple",
-					8) != 0) && (ft_strlen(argv[i]) != 8 || ft_strncmp(argv[i],
-					"--medium", 8) != 0) && (ft_strlen(argv[i]) != 9
-				|| ft_strncmp(argv[i], "--complex", 9) != 0)
-			&& (ft_strlen(argv[i]) != 10 || ft_strncmp(argv[i], "--adaptive",
-					10) != 0))
-			argv[j++] = argv[i];
-		i++;
-	}
-	argv[j] = NULL;
-}
-
 // Confirm all entries are digits or +/-
-static int	is_digit(char **argv)
+static int	is_number(char **argv)
 {
 	int	i;
 	int	j;
@@ -104,10 +81,9 @@ static int	is_unique(char **argv)
 }
 
 // Validate list
-int	validate_list(int argc, char **argv)
+int	validate_list(char **argv)
 {
-	filter_flags(argc, argv);
-	if (!is_digit(argv) || !is_integer(argv) || !is_unique(argv))
-		return (ft_putendl_fd("Error", 2), 0);
-	return (1);
+	if (is_number(argv) && is_integer(argv) && is_unique(argv))
+		return (1);
+	return (ft_putendl_fd("Error", 2), 0);
 }

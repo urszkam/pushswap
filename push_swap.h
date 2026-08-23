@@ -83,6 +83,6 @@ void	complex_rotate(t_stack **stack, t_meta *meta, int to_b);
 void	complex_reverse_rotate(t_stack **stack, t_meta *meta, int to_b);
 
 double	compute_disorder(t_stack *stack_a);
-int		validate_list(int argc, char **argv);
+int		validate_list(char **argv);
 
 #endif
