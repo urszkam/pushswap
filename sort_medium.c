@@ -6,78 +6,122 @@
 /*   By: pausulzy <pausulzy@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:02:40 by urkamins          #+#    #+#             */
-/*   Updated: 2026/08/23 17:01:05 by pausulzy         ###   ########.fr       */
+/*   Updated: 2026/09/01 13:50:40 by pausulzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	find_index(t_stack *stack, void *target)
+// Get min and max values from stack
+static void	get_range(t_stack *stack_a, int *min, int *max)
 {
-	int	index;
+	int	value;
 
-	index = 0;
-	while (stack && !eq(target, stack->content))
+	*min = *((int *)stack_a->content);
+	*max = *min;
+	while (stack_a)
 	{
-		stack = stack->next;
-		index++;
-	}
-	return (index);
-}
-
-static int	find_target(t_stack *stack_b, void *number, void *max)
-{
-	t_stack	*previous;
-	int		index;
-
-	previous = ft_lstlast(stack_b);
-	index = 0;
-	while (stack_b)
-	{
-		if ((lt(number, previous->content) && gt(number, stack_b->content))
-			|| (eq(max, stack_b->content) && (gt(number, stack_b->content)
-					|| lt(number, previous->content))))
-			return (index);
-		previous = stack_b;
-		stack_b = stack_b->next;
-		index++;
-	}
-	return (0);
-}
-
-static void	rotate_to_value(t_stack **stack_b, int index, t_meta *meta)
-{
-	int	size;
-
-	size = ft_lstsize(*stack_b);
-	if (index <= size / 2)
-		while (index--)
-			rb(stack_b, meta);
-	else
-	{
-		index = size - index;
-		while (index--)
-			rrb(stack_b, meta);
+		value = *((int *)stack_a->content);
+		if (value < *min)
+			*min = value;
+		if (value > *max)
+			*max = value;
+		stack_a = stack_a->next;
 	}
 }
 
+// Put values in their corresponding buckets
+static int	get_bucket(int value, int min, int bucket_count, int bucket_size)
+{
+	int	bucket_target;
+
+	bucket_target = (value - min) / bucket_size;
+	if (bucket_target >= bucket_count)
+		bucket_target = bucket_count - 1;
+	if (bucket_target < 0)
+		bucket_target = 0;
+	return (bucket_target);
+}
+
+// Rotate A to distribute values to B by buckets, largest first
+static void	push_to_b(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
+{
+	int	min;
+	int	max;
+	int	bucket_count;
+	int	bucket_size;
+	int	bucket_target;
+
+	get_range(*stack_a, &min, &max);
+	bucket_count = 0;
+	while ((bucket_count + 1) * (bucket_count + 1) <= ft_lstsize(*stack_a))
+		bucket_count++;
+	if (bucket_count < 2)
+		bucket_count = 2;
+	bucket_size = (max - min) / bucket_count + 1;
+	bucket_target = bucket_count;
+	while (--bucket_target >= 0)
+	{
+		max = ft_lstsize(*stack_a);
+		while (max-- > 0)
+			if (get_bucket(*((int *)(*stack_a)->content), min, bucket_count,
+					bucket_size) == bucket_target)
+				pb(stack_b, stack_a, meta);
+			else
+				ra(stack_a, meta);
+	}
+}
+
+// Return the position of the largest value in the stack
+static int	find_max_pos(t_stack *stack)
+{
+	t_stack	*cur;
+	int		best_val;
+	int		best_pos;
+	int		pos;
+
+	cur = stack;
+	best_val = *((int *)cur->content);
+	best_pos = 0;
+	pos = 0;
+	while (cur)
+	{
+		if (*((int *)cur->content) > best_val)
+		{
+			best_val = *((int *)cur->content);
+			best_pos = pos;
+		}
+		cur = cur->next;
+		pos++;
+	}
+	return (best_pos);
+}
+
+// Main sort function, rotating B to pop and push highest values onto A
 void	sort_medium(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
 {
-	void	*max;
-	int		target;
+	int	len;
+	int	best_pos;
+	int	i;
 
-	max = (*stack_a)->content;
-	pb(stack_b, stack_a, meta);
-	while (*stack_a)
+	if (ft_lstsize(*stack_a) <= 1)
+		return ;
+	push_to_b(stack_a, stack_b, meta);
+	while ((len = ft_lstsize(*stack_b)) > 0)
 	{
-		target = find_target(*stack_b, (*stack_a)->content, max);
-		rotate_to_value(stack_b, target, meta);
-		if (lt(max, (*stack_a)->content))
-			max = (*stack_a)->content;
-		pb(stack_b, stack_a, meta);
-	}
-	target = find_index(*stack_b, max);
-	rotate_to_value(stack_b, target, meta);
-	while (*stack_b)
+		best_pos = find_max_pos(*stack_b);
+		if (best_pos <= len / 2)
+		{
+			i = 0;
+			while (i++ < best_pos)
+				rb(stack_b, meta);
+		}
+		else
+		{
+			i = best_pos;
+			while (i++ < len)
+				rrb(stack_b, meta);
+		}
 		pa(stack_a, stack_b, meta);
+	}
 }
