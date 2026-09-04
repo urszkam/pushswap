@@ -6,122 +6,101 @@
 /*   By: pausulzy <pausulzy@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:02:40 by urkamins          #+#    #+#             */
-/*   Updated: 2026/09/01 13:50:40 by pausulzy         ###   ########.fr       */
+/*   Updated: 2026/09/04 17:36:33 by pausulzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// Get min and max values from stack
-static void	get_range(t_stack *stack_a, int *min, int *max)
+// Calculate rank (position by ascending value)
+static int	get_rank(t_stack *stack, int value)
 {
-	int	value;
+	int	rank;
 
-	*min = *((int *)stack_a->content);
-	*max = *min;
-	while (stack_a)
+	rank = 0;
+	while (stack)
 	{
-		value = *((int *)stack_a->content);
-		if (value < *min)
-			*min = value;
-		if (value > *max)
-			*max = value;
-		stack_a = stack_a->next;
+		if (*(int *)stack->content < value)
+			rank++;
+		stack = stack->next;
 	}
+	return (rank);
 }
 
-// Put values in their corresponding buckets
-static int	get_bucket(int value, int min, int bucket_count, int bucket_size)
-{
-	int	bucket_target;
-
-	bucket_target = (value - min) / bucket_size;
-	if (bucket_target >= bucket_count)
-		bucket_target = bucket_count - 1;
-	if (bucket_target < 0)
-		bucket_target = 0;
-	return (bucket_target);
-}
-
-// Rotate A to distribute values to B by buckets, largest first
-static void	push_to_b(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
-{
-	int	min;
-	int	max;
-	int	bucket_count;
-	int	bucket_size;
-	int	bucket_target;
-
-	get_range(*stack_a, &min, &max);
-	bucket_count = 0;
-	while ((bucket_count + 1) * (bucket_count + 1) <= ft_lstsize(*stack_a))
-		bucket_count++;
-	if (bucket_count < 2)
-		bucket_count = 2;
-	bucket_size = (max - min) / bucket_count + 1;
-	bucket_target = bucket_count;
-	while (--bucket_target >= 0)
-	{
-		max = ft_lstsize(*stack_a);
-		while (max-- > 0)
-			if (get_bucket(*((int *)(*stack_a)->content), min, bucket_count,
-					bucket_size) == bucket_target)
-				pb(stack_b, stack_a, meta);
-			else
-				ra(stack_a, meta);
-	}
-}
-
-// Return the position of the largest value in the stack
-static int	find_max_pos(t_stack *stack)
+// Find next required value in B, optimize rotation and pop back to A
+static void	push_to_a(t_stack **stack_a, t_stack **stack_b, t_meta *meta,
+		int target)
 {
 	t_stack	*cur;
-	int		best_val;
-	int		best_pos;
 	int		pos;
+	int		size;
 
-	cur = stack;
-	best_val = *((int *)cur->content);
-	best_pos = 0;
+	cur = *stack_b;
 	pos = 0;
-	while (cur)
+	while (cur && get_rank(*stack_b, *(int *)cur->content) != target)
 	{
-		if (*((int *)cur->content) > best_val)
-		{
-			best_val = *((int *)cur->content);
-			best_pos = pos;
-		}
 		cur = cur->next;
 		pos++;
 	}
-	return (best_pos);
+	size = ft_lstsize(*stack_b);
+	if (pos <= size / 2)
+	{
+		while (pos--)
+			rb(stack_b, meta);
+	}
+	else
+	{
+		pos = size - pos;
+		while (pos--)
+			rrb(stack_b, meta);
+	}
+	pa(stack_a, stack_b, meta);
 }
 
-// Main sort function, rotating B to pop and push highest values onto A
-void	sort_medium(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
+// Move values from A to B via expanding window
+static void	push_to_b(t_stack **stack_a, t_stack **stack_b, t_meta *m, int size)
 {
-	int	len;
-	int	best_pos;
+	int	window;
 	int	i;
+	int	rank;
 
-	if (ft_lstsize(*stack_a) <= 1)
-		return ;
-	push_to_b(stack_a, stack_b, meta);
-	while ((len = ft_lstsize(*stack_b)) > 0)
+	window = 15;
+	if (size > 100)
+		window = 30;
+	i = 0;
+	while (*stack_a)
 	{
-		best_pos = find_max_pos(*stack_b);
-		if (best_pos <= len / 2)
+		rank = get_rank(*stack_a, *(int *)(*stack_a)->content) + i;
+		if (rank <= i)
 		{
-			i = 0;
-			while (i++ < best_pos)
-				rb(stack_b, meta);
+			pb(stack_b, stack_a, m);
+			rb(stack_b, m);
+			i++;
+		}
+		else if (rank <= i + window)
+		{
+			pb(stack_b, stack_a, m);
+			i++;
 		}
 		else
-		{
-			i = best_pos;
-			while (i++ < len)
-				rrb(stack_b, meta);
-		}
-		pa(stack_a, stack_b, meta);
+			ra(stack_a, m);
+	}
+}
+
+// Send values from A to B in chunks then return to A in descending
+void	sort_medium(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
+{
+	int	size;
+	int	target;
+
+	size = ft_lstsize(*stack_a);
+	if (size <= 1)
+		return ;
+	push_to_b(stack_a, stack_b, meta, size);
+	target = size - 1;
+	while (target >= 0)
+	{
+		push_to_a(stack_a, stack_b, meta, target);
+		target--;
 	}
 }
