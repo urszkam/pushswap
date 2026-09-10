@@ -113,7 +113,7 @@ In the *Values* container, enter a number into the *Count* input and click *Shuf
 
 Stacks are implemented as singly linked lists, which support dynamic sizing and avoid shifting other elements when the top is modified.
 
-In the complexity estimates below, `n` denotes the input size, while the complexity (`O`) denotes the number of stack operations produced by the program × input size. The stacks require `O(n)` space for their nodes, while the algorithms use `O(1`)` additional space by relinking the existing nodes.
+In the complexity estimates below, `n` denotes the input size, while the complexity (`O`) denotes the number of stack operations produced by the program × input size. The stacks require `O(n)` space for their nodes, while the algorithms use `O(1)` additional space by relinking the existing nodes.
 
 ### Simple Sort
 
