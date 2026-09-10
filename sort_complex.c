@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   sort_complex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pausulzy <pausulzy@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:02:40 by urkamins          #+#    #+#             */
-/*   Updated: 2026/08/10 23:02:40 by urkamins         ###   ########.fr       */
+/*   Updated: 2026/09/10 17:31:04 by pausulzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static int	compute_iterations(int size)
+{
+	int	iterations;
+
+	iterations = 0;
+	while (size > 1)
+	{
+		iterations++;
+		size = (size + 1) / 2;
+	}
+	return (iterations);
+}
 
 static void	compute_complex_metadata(t_complex_meta *meta, t_stack *stack)
 {
@@ -22,8 +35,8 @@ static void	compute_complex_metadata(t_complex_meta *meta, t_stack *stack)
 	meta->remaining_a = meta->len - meta->remaining_b;
 }
 
-void	merge_run(t_stack **stack_a, t_stack **stack_b,
-	t_meta *meta, t_complex_meta *complex)
+void	merge_run(t_stack **stack_a, t_stack **stack_b, t_meta *meta,
+		t_complex_meta *complex)
 {
 	int	take_a;
 
@@ -48,14 +61,14 @@ void	merge_run(t_stack **stack_a, t_stack **stack_b,
 }
 
 static void	merge_sort_iteration(t_stack **stack_a, t_stack **stack_b,
-	t_meta *meta, t_complex_meta *complex)
+		t_meta *meta, t_complex_meta *complex)
 {
 	while (complex->remaining_a > 0 || complex->remaining_b > 0)
 	{
-		complex->current_a = min(max(complex->remaining_a, 0),
-				complex->run_size / 2);
-		complex->current_b = min(max(complex->remaining_b, 0),
-				complex->run_size / 2);
+		complex->current_a = min(max(complex->remaining_a, 0), complex->run_size
+				/ 2);
+		complex->current_b = min(max(complex->remaining_b, 0), complex->run_size
+				/ 2);
 		if (!complex->iterations)
 			complex->to_b = 0;
 		else

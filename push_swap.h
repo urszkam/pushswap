@@ -6,7 +6,7 @@
 /*   By: pausulzy <pausulzy@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/09 12:26:49 by urkamins          #+#    #+#             */
-/*   Updated: 2026/08/23 15:39:57 by pausulzy         ###   ########.fr       */
+/*   Updated: 2026/09/10 17:28:55 by pausulzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int		gt(void *num1, void *num2);
 int		eq(void *num1, void *num2);
 int		min(int num1, int num2);
 int		max(int num1, int num2);
-int		compute_iterations(int size);
 
 void	complex_push(t_stack **from, t_stack **to,
 			t_meta *meta, int to_b);
