@@ -6,78 +6,101 @@
 /*   By: pausulzy <pausulzy@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:02:40 by urkamins          #+#    #+#             */
-/*   Updated: 2026/08/23 17:01:05 by pausulzy         ###   ########.fr       */
+/*   Updated: 2026/09/04 17:36:33 by pausulzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	find_index(t_stack *stack, void *target)
+// Calculate rank (position by ascending value)
+static int	get_rank(t_stack *stack, int value)
 {
-	int	index;
+	int	rank;
 
-	index = 0;
-	while (stack && !eq(target, stack->content))
+	rank = 0;
+	while (stack)
 	{
+		if (*(int *)stack->content < value)
+			rank++;
 		stack = stack->next;
-		index++;
 	}
-	return (index);
+	return (rank);
 }
 
-static int	find_target(t_stack *stack_b, void *number, void *max)
+// Find next required value in B, optimize rotation and pop back to A
+static void	push_to_a(t_stack **stack_a, t_stack **stack_b, t_meta *meta,
+		int target)
 {
-	t_stack	*previous;
-	int		index;
+	t_stack	*cur;
+	int		pos;
+	int		size;
 
-	previous = ft_lstlast(stack_b);
-	index = 0;
-	while (stack_b)
+	cur = *stack_b;
+	pos = 0;
+	while (cur && get_rank(*stack_b, *(int *)cur->content) != target)
 	{
-		if ((lt(number, previous->content) && gt(number, stack_b->content))
-			|| (eq(max, stack_b->content) && (gt(number, stack_b->content)
-					|| lt(number, previous->content))))
-			return (index);
-		previous = stack_b;
-		stack_b = stack_b->next;
-		index++;
+		cur = cur->next;
+		pos++;
 	}
-	return (0);
-}
-
-static void	rotate_to_value(t_stack **stack_b, int index, t_meta *meta)
-{
-	int	size;
-
 	size = ft_lstsize(*stack_b);
-	if (index <= size / 2)
-		while (index--)
+	if (pos <= size / 2)
+	{
+		while (pos--)
 			rb(stack_b, meta);
+	}
 	else
 	{
-		index = size - index;
-		while (index--)
+		pos = size - pos;
+		while (pos--)
 			rrb(stack_b, meta);
+	}
+	pa(stack_a, stack_b, meta);
+}
+
+// Move values from A to B via expanding window
+static void	push_to_b(t_stack **stack_a, t_stack **stack_b, t_meta *m, int size)
+{
+	int	window;
+	int	i;
+	int	rank;
+
+	window = 15;
+	if (size > 100)
+		window = 30;
+	i = 0;
+	while (*stack_a)
+	{
+		rank = get_rank(*stack_a, *(int *)(*stack_a)->content) + i;
+		if (rank <= i)
+		{
+			pb(stack_b, stack_a, m);
+			rb(stack_b, m);
+			i++;
+		}
+		else if (rank <= i + window)
+		{
+			pb(stack_b, stack_a, m);
+			i++;
+		}
+		else
+			ra(stack_a, m);
 	}
 }
 
+// Send values from A to B in chunks then return to A in descending
 void	sort_medium(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
 {
-	void	*max;
-	int		target;
+	int	size;
+	int	target;
 
-	max = (*stack_a)->content;
-	pb(stack_b, stack_a, meta);
-	while (*stack_a)
+	size = ft_lstsize(*stack_a);
+	if (size <= 1)
+		return ;
+	push_to_b(stack_a, stack_b, meta, size);
+	target = size - 1;
+	while (target >= 0)
 	{
-		target = find_target(*stack_b, (*stack_a)->content, max);
-		rotate_to_value(stack_b, target, meta);
-		if (lt(max, (*stack_a)->content))
-			max = (*stack_a)->content;
-		pb(stack_b, stack_a, meta);
+		push_to_a(stack_a, stack_b, meta, target);
+		target--;
 	}
-	target = find_index(*stack_b, max);
-	rotate_to_value(stack_b, target, meta);
-	while (*stack_b)
-		pa(stack_a, stack_b, meta);
 }

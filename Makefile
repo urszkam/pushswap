@@ -6,7 +6,7 @@
 #    By: pausulzy <pausulzy@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/17 15:10:56 by pausulzy          #+#    #+#              #
-#    Updated: 2026/08/18 10:07:11 by pausulzy         ###   ########.fr        #
+#    Updated: 2026/09/10 17:31:43 by pausulzy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIB_PATH	= ${LIB_DIR}/${LIBFT}
 OUT_NAME	= push_swap
 SRCS		= main.c utils.c sort_utils.c print_bench.c sort_complex.c \
 			sort_medium.c sort_simple.c push.c swap.c rotate.c \
-			rotate_reverse.c complex_sort_utils.c validate_list.c
+			rotate_reverse.c validate_list.c
 OBJS		= ${SRCS:.c=.o}
 HEADER_DIR	= ./
 CFLAGS		= -Wall -Wextra -Werror
