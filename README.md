@@ -125,7 +125,7 @@ Simple sort inserts each of the `n` values into `stack_b`. Finding the correct p
 4. Once `stack_a` is empty, rotate `stack_b` until its `maximum` is on top (`stack_b` is kept in descending order).
 5. Push every value back to `stack_a`, leaving it in ascending order.
 
-![Simple sort visualization](https://raw.githubusercontent.com/urszkam/pushswap/refs/heads/dev/paul/img/simple.jpg)
+![Simple sort visualization](https://github.com/urszkam/pushswap/blob/main/img/simple.jpg?raw=true)
 *Visualizer of this insertion sort in three phases, passing values first to the second stack, then showing the second stack and its near-organized state a little before its return run, and finally showing the returning of the values to a final organized state to the original stack.*
 
 ### Medium Sort
@@ -143,7 +143,7 @@ A helpful metaphor lies in imagining a teacher sorting a hundred exams by grade.
 
 A final note about chunk window size: this was chosen simply through trial and error, as the numbers `15` and `30` worked well with the anticipated tests listed in the project outline.
 
-![Medium sort visualization](https://raw.githubusercontent.com/urszkam/pushswap/refs/heads/dev/paul/img/medium.jpg)
+![Medium sort visualization](https://github.com/urszkam/pushswap/blob/main/img/medium.jpg?raw=true)
 *Visualizer of this butterfly sort showing the first pass ongoing, then the first pass complete and achieving its namesake shape, and lastly the second pass ongoing, nearing completion.*
 
 ### Complex Sort
@@ -156,7 +156,7 @@ Complex sort is implemented as a bottom-up merge sort algorithm. Each iteration 
 3. Double the run size after each full iteration.
 4. Repeat the merge until one sorted run of size (`stack_a`) remains.
 
-![Complex sort visualization](https://raw.githubusercontent.com/urszkam/pushswap/refs/heads/dev/paul/img/complex.jpg)
+![Complex sort visualization](https://github.com/urszkam/pushswap/blob/main/img/complex.jpg?raw=true)
 *Visualizer of this bottom-up merge sort cascading values into increased order at three subsequent intervals as the program runs, swapping values back and forth between stacks.*
 
 ### Adaptive Sort
