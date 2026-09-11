@@ -11,15 +11,14 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static void	print_stack(t_stack *stack)
+/* static void	print_stack(t_stack *stack)
 {
 	while (stack)
 	{
 		ft_printf("%d\n", *(int *)stack->content);
 		stack = stack->next;
 	}
-}
+} */
 
 static void	free_stack(t_stack **stack)
 {
@@ -93,7 +92,6 @@ int	main(int argc, char **argv)
 	sort_stack(&stack_a, disorder, algorithm_flag, &meta);
 	if (bench)
 		print_bench(disorder, algorithm_flag, meta);
-	print_stack(stack_a);
 	free_stack(&stack_a);
 	return (0);
 }
