@@ -47,6 +47,32 @@ static int	find_target(t_stack *stack_b, void *number, void *max)
 	return (0);
 }
 
+static int	find_cheapest_push_to_b_index(t_stack *stack_a, t_stack *stack_b,
+		void *max)
+{
+	int	index;
+	int	best;
+	int	cost;
+	int	target;
+
+	index = 0;
+	best = 0;
+	cost = ft_lstsize(stack_b);
+	while (stack_a && index < cost)
+	{
+		target = find_target(stack_b, stack_a->content, max);
+		target = index + min(target, ft_lstsize(stack_b) - target);
+		if (target < cost)
+		{
+			cost = target;
+			best = index;
+		}
+		stack_a = stack_a->next;
+		index++;
+	}
+	return (best);
+}
+
 static void	rotate_to_value(t_stack **stack_b, int index, t_meta *meta)
 {
 	int	size;
@@ -72,6 +98,9 @@ void	sort_simple(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
 	pb(stack_b, stack_a, meta);
 	while (*stack_a)
 	{
+		target = find_cheapest_push_to_b_index(*stack_a, *stack_b, max);
+		while (target--)
+			ra(stack_a, meta);
 		target = find_target(*stack_b, (*stack_a)->content, max);
 		rotate_to_value(stack_b, target, meta);
 		if (lt(max, (*stack_a)->content))

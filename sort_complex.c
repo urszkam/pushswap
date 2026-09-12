@@ -35,7 +35,7 @@ static void	compute_complex_metadata(t_complex_meta *meta, t_stack *stack)
 	meta->remaining_a = meta->len - meta->remaining_b;
 }
 
-void	merge_run(t_stack **stack_a, t_stack **stack_b, t_meta *meta,
+static void	merge_run(t_stack **stack_a, t_stack **stack_b, t_meta *meta,
 		t_complex_meta *complex)
 {
 	int	take_a;

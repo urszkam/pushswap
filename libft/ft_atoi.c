@@ -19,8 +19,8 @@ static int	ft_isspace(int c)
 
 int	ft_atoi(const char *nptr)
 {
-	int	sign;
-	int	result;
+	int		sign;
+	long	result;
 
 	sign = 1;
 	result = 0;

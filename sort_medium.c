@@ -13,14 +13,14 @@
 #include "push_swap.h"
 
 // Calculate rank (position by ascending value)
-static int	get_rank(t_stack *stack, int value)
+static int	get_rank(t_stack *stack, void *value)
 {
 	int	rank;
 
 	rank = 0;
 	while (stack)
 	{
-		if (*(int *)stack->content < value)
+		if (lt(stack->content, value))
 			rank++;
 		stack = stack->next;
 	}
@@ -37,7 +37,7 @@ static void	push_to_a(t_stack **stack_a, t_stack **stack_b, t_meta *meta,
 
 	cur = *stack_b;
 	pos = 0;
-	while (cur && get_rank(*stack_b, *(int *)cur->content) != target)
+	while (cur && get_rank(*stack_b, cur->content) != target)
 	{
 		cur = cur->next;
 		pos++;
@@ -58,29 +58,26 @@ static void	push_to_a(t_stack **stack_a, t_stack **stack_b, t_meta *meta,
 }
 
 // Move values from A to B via expanding window
-static void	push_to_b(t_stack **stack_a, t_stack **stack_b, t_meta *m, int size)
+static void	push_to_b(t_stack **stack_a, t_stack **stack_b,
+		t_meta *m, int size)
 {
 	int	window;
 	int	i;
 	int	rank;
 
-	window = 15;
-	if (size > 100)
-		window = 30;
+	window = 1;
+	while (window <= (size - 1) / window)
+		window++;
 	i = 0;
 	while (*stack_a)
 	{
-		rank = get_rank(*stack_a, *(int *)(*stack_a)->content) + i;
-		if (rank <= i)
-		{
-			pb(stack_b, stack_a, m);
-			rb(stack_b, m);
-			i++;
-		}
-		else if (rank <= i + window)
+		rank = get_rank(*stack_a, (*stack_a)->content);
+		if (rank < window - i)
 		{
 			pb(stack_b, stack_a, m);
 			i++;
+			if (i == window)
+				i = 0;
 		}
 		else
 			ra(stack_a, m);
@@ -94,8 +91,6 @@ void	sort_medium(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
 	int	target;
 
 	size = ft_lstsize(*stack_a);
-	if (size <= 1)
-		return ;
 	push_to_b(stack_a, stack_b, meta, size);
 	target = size - 1;
 	while (target >= 0)
