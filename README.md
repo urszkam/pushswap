@@ -21,7 +21,7 @@
 
 **Push_swap** sorts integers using two stacks and a limited set of operations. The goal is to produce the shortest possible sequence of moves.
 
-- **Push** (`pa`, `p`b`): moves a value from the top of one stack onto the top of the other
+- **Push** (`pa`, `pb`): moves a value from the top of one stack onto the top of the other
 - **Swap** (`sa`, `sb`, `ss`): swaps the first two values on the top of a given stack
 - **Rotate** (`ra`, `rb`, `rr`): "rotates" the stack, sending its top value to the bottom
 - **Reverse rotate** (`rra`, `rrb`, `rrr`): the same in reverse, bringing the bottom value to the top

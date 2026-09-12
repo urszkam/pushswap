@@ -6,7 +6,7 @@
 /*   By: pausulzy <pausulzy@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:02:40 by urkamins          #+#    #+#             */
-/*   Updated: 2026/09/10 17:31:04 by pausulzy         ###   ########.fr       */
+/*   Updated: 2026/09/12 13:48:58 by pausulzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	compute_complex_metadata(t_complex_meta *meta, t_stack *stack)
 	meta->remaining_a = meta->len - meta->remaining_b;
 }
 
-void	merge_run(t_stack **stack_a, t_stack **stack_b, t_meta *meta,
+static void	merge_run(t_stack **stack_a, t_stack **stack_b, t_meta *meta,
 		t_complex_meta *complex)
 {
 	int	take_a;
