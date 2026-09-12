@@ -60,7 +60,7 @@ static void	sort_stack(t_stack **stack_a, double disorder, char *algorithm,
 		return ;
 	stack_b = NULL;
 	if (equals(algorithm, "simple") || (equals(algorithm, "adaptive")
-			&& disorder <= 0.2))
+			&& disorder < 0.2))
 		sort_simple(stack_a, &stack_b, meta);
 	else if (equals(algorithm, "medium") || (equals(algorithm, "adaptive")
 			&& disorder < 0.5))
