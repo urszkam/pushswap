@@ -46,8 +46,8 @@ void	simple_small(t_stack **stack, t_meta *meta)
 	while (temp)
 	{
 		if (gt(temp->content, max))
-			max = stack->content;
-		stack = stack->next;
+			max = temp->content;
+		temp = temp->next;
 	}
 	while (!is_sorted(*stack))
 	{
@@ -78,7 +78,7 @@ static void	push_min(t_stack **st, t_stack **stack_b, t_meta *meta)
 	}
 	while (!eq((*st)->content, smallest->content))
 	{
-		if (ft_lstsize(*st) - ft_lstsize(smallest) <= size / 2)
+		if (ft_lstsize(*st) - ft_lstsize(smallest) <= ft_lstsize(*st) / 2)
 			ra(st, meta);
 		else
 			rra(st, meta);
@@ -108,7 +108,7 @@ void	complex_small(t_stack **st, t_stack **stack_b, t_meta *meta,
 		if (gt((*st)->content, ft_lstlast(*st)->content))
 			sa(st, meta);
 		simple_small(st, meta);
-		if (complex->iterations == 5)
+		if (complex->iterations == 3)
 			pa(st, stack_b, meta);
 	}
 }
