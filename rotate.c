@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
+/*   By: urkamins <urkamins@student.42warsaw.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:02:40 by urkamins          #+#    #+#             */
 /*   Updated: 2026/08/10 23:02:40 by urkamins         ###   ########.fr       */
