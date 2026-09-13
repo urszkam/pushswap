@@ -86,6 +86,11 @@ void	sort_complex(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
 
 	ft_bzero(&complex, sizeof(t_complex_meta));
 	compute_complex_metadata(&complex, *stack_a);
+	if (complex.len <= 5)
+	{
+		complex_small(stack_a, stack_b, meta, &complex);
+		return ;
+	}
 	initial_push_size = complex.remaining_b;
 	while (initial_push_size--)
 		pb(stack_b, stack_a, meta);

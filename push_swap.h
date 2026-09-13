@@ -75,11 +75,13 @@ int		eq(void *num1, void *num2);
 int		min(int num1, int num2);
 int		max(int num1, int num2);
 
-void	complex_push(t_stack **from, t_stack **to,
-			t_meta *meta, int to_b);
+void	complex_push(t_stack **from, t_stack **to, t_meta *meta, int to_b);
 void	complex_swap(t_stack **stack, t_meta *meta, int to_b);
 void	complex_rotate(t_stack **stack, t_meta *meta, int to_b);
 void	complex_reverse_rotate(t_stack **stack, t_meta *meta, int to_b);
+void	simple_small(t_stack **stack, t_meta *meta);
+void	complex_small(t_stack **st, t_stack **stack_b, t_meta *meta,
+			t_complex_meta *complex);
 
 double	compute_disorder(t_stack *stack_a);
 int		validate_list(char **argv);

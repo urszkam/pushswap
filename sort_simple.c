@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   sort_simple.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urkamins <urkamins@student.42.fr>          +#+  +:+       +#+        */
+/*   By: urkamins <urkamins@student.42warsaw.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:02:40 by urkamins          #+#    #+#             */
 /*   Updated: 2026/08/10 23:02:40 by urkamins         ###   ########.fr       */
@@ -94,6 +94,11 @@ void	sort_simple(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
 	void	*max;
 	int		target;
 
+	if (ft_lstsize(*stack_a) <= 5)
+	{
+		simple_small(stack_a, meta);
+		return ;
+	}
 	max = (*stack_a)->content;
 	pb(stack_b, stack_a, meta);
 	while (*stack_a)
