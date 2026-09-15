@@ -6,96 +6,120 @@
 /*   By: pausulzy <pausulzy@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:02:40 by urkamins          #+#    #+#             */
-/*   Updated: 2026/09/04 17:36:33 by pausulzy         ###   ########.fr       */
+/*   Updated: 2026/09/15 20:35:43 by pausulzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// Calculate rank (position by ascending value)
-static int	get_rank(t_stack *stack, void *value)
+// Copy and bubble sort all values from A into an array
+static int	*sort_array(t_stack *stack_a, int size)
 {
-	int	rank;
-
-	rank = 0;
-	while (stack)
-	{
-		if (lt(stack->content, value))
-			rank++;
-		stack = stack->next;
-	}
-	return (rank);
-}
-
-// Find next required value in B, optimize rotation and pop back to A
-static void	push_to_a(t_stack **stack_a, t_stack **stack_b, t_meta *meta,
-		int target)
-{
-	t_stack	*cur;
-	int		pos;
-	int		size;
-
-	cur = *stack_b;
-	pos = 0;
-	while (cur && get_rank(*stack_b, cur->content) != target)
-	{
-		cur = cur->next;
-		pos++;
-	}
-	size = ft_lstsize(*stack_b);
-	if (pos <= size / 2)
-	{
-		while (pos--)
-			rb(stack_b, meta);
-	}
-	else
-	{
-		pos = size - pos;
-		while (pos--)
-			rrb(stack_b, meta);
-	}
-	pa(stack_a, stack_b, meta);
-}
-
-// Move values from A to B via expanding window
-static void	push_to_b(t_stack **stack_a, t_stack **stack_b,
-		t_meta *m, int size)
-{
-	int	window;
+	int	*arr;
 	int	i;
-	int	rank;
+	int	tmp;
 
-	window = 1;
-	while (window <= (size - 1) / window)
-		window++;
+	arr = malloc(sizeof(int) * size);
+	if (!arr)
+		return (NULL);
 	i = 0;
+	while (stack_a)
+	{
+		arr[i++] = *(int *)stack_a->content;
+		stack_a = stack_a->next;
+	}
+	i = 0;
+	while (++i < size)
+	{
+		if (arr[i - 1] > arr[i])
+		{
+			tmp = arr[i - 1];
+			arr[i - 1] = arr[i];
+			arr[i] = tmp;
+			i = 0;
+		}
+	}
+	return (arr);
+}
+
+// Compute √A sliding window and push values from a rotating A to a rotating B
+static void	push_to_b(t_stack **stack_a, t_stack **stack_b, t_meta *meta,
+		int size)
+{
+	int	pushed;
+	int	window;
+
+	pushed = 0;
+	window = 0;
+	while ((window + 1) * (window + 1) <= size)
+		window++;
 	while (*stack_a)
 	{
-		rank = get_rank(*stack_a, (*stack_a)->content);
-		if (rank < window - i)
+		if (*(int *)(*stack_a)->content <= pushed + window)
 		{
-			pb(stack_b, stack_a, m);
-			i++;
-			if (i == window)
-				i = 0;
+			pushed++;
+			pb(stack_b, stack_a, meta);
+			if (ft_lstsize((t_list *)*stack_b) > 1
+				&& *(int *)(*stack_b)->content < pushed - window / 2)
+				rb(stack_b, meta);
 		}
 		else
-			ra(stack_a, m);
+			ra(stack_a, meta);
 	}
 }
 
-// Send values from A to B in chunks then return to A in descending
+// Rotate B to clip values from either end back to A most efficiently
+static void	push_to_a(t_stack **stack_a, t_stack **stack_b, t_meta *meta,
+		int size)
+{
+	int		target;
+	int		position;
+	int		b_size;
+	t_stack	*current;
+
+	target = size;
+	while (--target >= 0)
+	{
+		position = 0;
+		current = *stack_b;
+		while (current && *(int *)current->content != target && ++position)
+			current = current->next;
+		if (current)
+		{
+			b_size = ft_lstsize((t_list *)*stack_b);
+			if (position <= b_size / 2)
+				while (position-- > 0)
+					rb(stack_b, meta);
+			else
+				while (b_size - position++ > 0)
+					rrb(stack_b, meta);
+			pa(stack_a, stack_b, meta);
+		}
+	}
+}
+
+// Replace A values with their ranks, then push A to B and back
 void	sort_medium(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
 {
-	int	size;
-	int	target;
+	int		size;
+	int		*sorted;
+	int		i;
+	t_stack	*current;
 
-	size = ft_lstsize(*stack_a);
-	push_to_b(stack_a, stack_b, meta, size);
-	target = size - 1;
-	while (target >= 0)
+	size = ft_lstsize((t_list *)*stack_a);
+	sorted = sort_array(*stack_a, size);
+	if (size < 2 || !sorted)
+		return ;
+	current = *stack_a;
+	while (current)
 	{
-		push_to_a(stack_a, stack_b, meta, target);
-		target--;
+		i = 0;
+		while (i < size && sorted[i] != *(int *)current->content)
+			i++;
+		*(int *)current->content = i;
+		current = current->next;
 	}
+	free(sorted);
+	push_to_b(stack_a, stack_b, meta, size);
+	push_to_a(stack_a, stack_b, meta, size);
 }
