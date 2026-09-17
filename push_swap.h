@@ -75,6 +75,8 @@ int		eq(void *num1, void *num2);
 int		min(int num1, int num2);
 int		max(int num1, int num2);
 
+void	split_args(char ***argv);
+void	free_args(char **args);
 void	complex_push(t_stack **from, t_stack **to, t_meta *meta, int to_b);
 void	complex_swap(t_stack **stack, t_meta *meta, int to_b);
 void	complex_rotate(t_stack **stack, t_meta *meta, int to_b);
