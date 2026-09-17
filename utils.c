@@ -37,18 +37,22 @@ void	extract_flags(char ***argv, char **algorithm, int *bench)
 	algorithms[2] = "complex";
 	*algorithm = "adaptive";
 	*bench = 0;
-	while (**argv && is_flag(**argv))
+	while (argv && *argv && **argv && is_flag(**argv))
 	{
 		idx = 0;
-		(**argv) += 2;
 		while (idx < 3)
-		{
-			if (equals(**argv, algorithms[idx++]))
-				*algorithm = **argv;
-		}
-		if (equals(**argv, "bench"))
+			if (equals(**argv + 2, algorithms[idx++]))
+				*algorithm = algorithms[idx - 1];
+		if (equals(**argv + 2, "bench"))
 			*bench = 1;
-		(*argv)++;
+		free(**argv);
+		idx = 0;
+		while ((*argv)[idx + 1])
+		{
+			(*argv)[idx] = (*argv)[idx + 1];
+			idx++;
+		}
+		(*argv)[idx] = NULL;
 	}
 }
 

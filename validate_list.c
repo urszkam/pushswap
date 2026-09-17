@@ -83,7 +83,8 @@ static int	is_unique(char **argv)
 // Validate list
 int	validate_list(char **argv)
 {
-	if (is_number(argv) && is_integer(argv) && is_unique(argv))
-		return (1);
+	if (argv && *argv)
+		if (is_number(argv) && is_integer(argv) && is_unique(argv))
+			return (1);
 	return (ft_putendl_fd("Error", 2), 0);
 }
