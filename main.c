@@ -59,7 +59,9 @@ static void	sort_stack(t_stack **stack_a, double disorder, char *algorithm,
 	if (!stack_a || !*stack_a || !(*stack_a)->next || disorder == 0)
 		return ;
 	stack_b = NULL;
-	if (equals(algorithm, "simple") || (equals(algorithm, "adaptive")
+	if (ft_lstsize(*stack_a) <= 3)
+		sort_tiny(stack_a, meta);
+	else if (equals(algorithm, "simple") || (equals(algorithm, "adaptive")
 			&& disorder < 0.2))
 		sort_simple(stack_a, &stack_b, meta);
 	else if (equals(algorithm, "medium") || (equals(algorithm, "adaptive")

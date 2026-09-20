@@ -54,6 +54,7 @@ void	print_bench(double disorder, char *algorithm, t_meta meta);
 void	sort_simple(t_stack **stack_a, t_stack **stack_b, t_meta *meta);
 void	sort_medium(t_stack **stack_a, t_stack **stack_b, t_meta *meta);
 void	sort_complex(t_stack **stack_a, t_stack **stack_b, t_meta *meta);
+void	sort_tiny(t_stack **stack, t_meta *meta);
 
 void	pa(t_stack **stack_a, t_stack **stack_b, t_meta *meta);
 void	pb(t_stack **stack_b, t_stack **stack_a, t_meta *meta);
@@ -67,6 +68,7 @@ void	rra(t_stack **stack_a, t_meta *meta);
 void	rrb(t_stack **stack_b, t_meta *meta);
 void	rrr(t_stack **stack_a, t_stack **stack_b, t_meta *meta);
 
+int		is_sorted(t_stack *stack);
 int		is_flag(char *s);
 int		equals(char *s1, char *s2);
 int		lt(void *num1, void *num2);

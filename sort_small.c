@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static int	is_sorted(t_stack *stack)
+int	is_sorted(t_stack *stack)
 {
 	while (stack->next)
 	{
@@ -67,7 +67,9 @@ static void	push_min(t_stack **st, t_stack **stack_b, t_meta *meta)
 {
 	t_stack	*smallest;
 	t_stack	*current;
+	int		size;
 
+	size = ft_lstsize(*st);
 	smallest = *st;
 	current = (*st)->next;
 	while (current)
@@ -78,7 +80,7 @@ static void	push_min(t_stack **st, t_stack **stack_b, t_meta *meta)
 	}
 	while (!eq((*st)->content, smallest->content))
 	{
-		if (ft_lstsize(*st) - ft_lstsize(smallest) <= ft_lstsize(*st) / 2)
+		if (size - ft_lstsize(smallest) <= size / 2)
 			ra(st, meta);
 		else
 			rra(st, meta);
