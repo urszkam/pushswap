@@ -6,7 +6,7 @@
 /*   By: pausulzy <pausulzy@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:02:40 by urkamins          #+#    #+#             */
-/*   Updated: 2026/09/21 17:04:56 by pausulzy         ###   ########.fr       */
+/*   Updated: 2026/09/21 17:20:26 by pausulzy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,12 @@ void	sort_medium(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
 	}
 	sorted = sort_array(*stack_a, size);
 	if (!sorted)
-		return ;
+	{
+		ft_lstclear(stack_a, free);
+		ft_lstclear(stack_b, free);
+		write(2, "Error\n", 6);
+		exit(1);
+	}
 	assign_ranks(*stack_a, sorted, size);
 	free(sorted);
 	push_to_b(stack_a, stack_b, meta, size);
