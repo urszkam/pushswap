@@ -95,7 +95,7 @@ make fclean
 - [Stack implementation with linked lists](https://medium.com/@dev.siddiquee/stack-implementation-with-singly-linked-list-a-guide-e9fa2b1aa14a)
 - [Sorting algorithms](https://www.programiz.com/dsa/sorting-algorithm)
 - [Insertion Sort](https://www.geeksforgeeks.org/dsa/insertion-sort-algorithm/)
-- [Butterfly sort](https://dynamicdispat.ch/posts/2024/01/push-swap/#-butterfly-sort-2)
+- [Bucket sort with sliding window](https://www.cs.tufts.edu/comp/15/schedule/lectures/sorting3/bucket_sort.pdf?utm_source)
 - [Merge sort](https://www.geeksforgeeks.org/dsa/merge-sort/)
 - [Bottom-up merge sort](https://www.baeldung.com/cs/merge-sort-top-down-vs-bottom-up)
 - AI was used to generate tests and search for possible optimizations, as well as to research algorithmic sorting in general
@@ -137,7 +137,7 @@ Simple sort inserts each of the `n` values into `stack_b`. Finding the correct p
 *Visualizer of this insertion sort in three phases, passing values first to the second stack, then showing the second stack and its near-organized state a little before its return run, and finally showing the returning of the values to a final organized state to the original stack.*
 
 ### Medium Sort
-Butterfly sort was chosen because it introduced some clever optimizations, namely a "bottomless window" and a clever "double sort" hack. Values are analyzed via rank on `stack_a` in constantly expanding chunks, with the chunk top limit growing by `1` with every value moved, while its bottom limit remaining at `0`. Values are then acted upon based on what category they fall into:
+Chunk-based sort or bucket sort wih sliding window was chosen because it introduced some clever optimizations, namely a "bottomless window" and a clever "double sort" hack. Values are analyzed via rank on `stack_a` in constantly expanding chunks, with the chunk top limit growing by `1` with every value moved, while its bottom limit remaining at `0`. Values are then acted upon based on what category they fall into:
 
 - Small, within chunk: pushed to the bottom of `stack_b`
 - Large, within chunk: pushed to the top of `stack_b`
@@ -149,10 +149,8 @@ This first phase renders an asymmetrical, butterfly-shaped `stack_b` of all valu
 
 A helpful metaphor lies in imagining a teacher sorting a hundred exams by grade. They start by flipping through all exams and pulling out all results from 0-9%, putting the ones 4% and lower at the bottom of a new stack, and those from 4-9% at the top. If any exam is higher than 9%, it's just moved to the end of the original stack. They then follow through with 10-19%, 20-29%… 80-89%, 90-100%, and are left with a stack of exams sorted into 10% "chunks", each of which is easy to then organize through a second pass. The butterfly sort implemented here uses the additional "bottomless window" optimization outlined earlier, which would be hard for the teacher to perform but which a computer can do quite easily.
 
-A final note about chunk window size: this was chosen simply through trial and error, as the numbers `15` and `30` worked well with the anticipated tests listed in the project outline.
-
 ![Medium sort visualization](https://github.com/urszkam/pushswap/blob/main/img/medium.jpg?raw=true)
-*Visualizer of this butterfly sort showing the first pass ongoing, then the first pass complete and achieving its namesake shape, and lastly the second pass ongoing, nearing completion.*
+*Visualizer of this chunk-based sort showing the first pass ongoing, then the first pass complete and achieving its namesake shape, and lastly the second pass ongoing, nearing completion.*
 
 ### Complex Sort
 
@@ -177,5 +175,7 @@ Adaptive sort chooses appropriate sorting strategy based in the input disorder. 
 ## Attribution
 
 Sorting operations, simple and complex sorts, and flags were coded by *urkamins*; the validator and medium sort by *pausulzy*. The remainder was a collaborative effort.
+
+AI was used for generating test samples with specific disorder values.
 
 ---
