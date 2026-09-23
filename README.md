@@ -69,6 +69,14 @@ Examples:
 ```bash
 ./push_swap 7 4 9 2 1
 ./push_swap --complex --bench 7 4 9 2 1
+# Sort 100 random integers
+./push_swap --simple --bench $(shuf -i 0-2147483647 -n 100)
+
+# Show only bench information without listing the operations
+./push_swap --medium --bench $(shuf -i 0-2147483647 -n 500) > /dev/null
+
+# Count operations
+./push_swap --complex $(shuf -i 0-2147483647 -n 500) | wc -l
 ```
 
 ### Cleanup
