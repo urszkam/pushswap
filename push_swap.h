@@ -84,6 +84,7 @@ void	complex_swap(t_stack **stack, t_meta *meta, int to_b);
 void	complex_rotate(t_stack **stack, t_meta *meta, int to_b);
 void	complex_reverse_rotate(t_stack **stack, t_meta *meta, int to_b);
 void	simple_small(t_stack **stack, t_meta *meta);
+void	medium_small(t_stack **stack_a, t_stack **stack_b, t_meta *meta);
 void	complex_small(t_stack **st, t_stack **stack_b, t_meta *meta,
 			t_complex_meta *complex);
 

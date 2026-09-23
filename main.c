@@ -90,7 +90,7 @@ int	main(int argc, char **argv)
 	stack_a = populate_stack(argv);
 	free_args(argv);
 	if (!stack_a)
-		return (1);
+		return (ft_putendl_fd("Error", 2), 1);
 	disorder = compute_disorder(stack_a);
 	ft_bzero(&meta, sizeof(t_meta));
 	sort_stack(&stack_a, disorder, algorithm_flag, &meta);
