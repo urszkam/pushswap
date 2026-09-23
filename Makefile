@@ -18,7 +18,7 @@ OUT_NAME	= push_swap
 SRCS		= main.c utils.c sort_utils.c print_bench.c sort_complex.c \
 			sort_medium.c sort_simple.c push.c swap.c rotate.c \
 			rotate_reverse.c validate_list.c sort_small.c arg_split.c \
-			sort_tiny.c
+			sort_small2.c
 OBJS		= ${SRCS:.c=.o}
 HEADER_DIR	= ./
 CFLAGS		= -Wall -Wextra -Werror

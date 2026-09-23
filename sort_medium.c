@@ -122,7 +122,7 @@ void	sort_medium(t_stack **stack_a, t_stack **stack_b, t_meta *meta)
 	size = ft_lstsize(*stack_a);
 	if (size <= 5)
 	{
-		simple_small(stack_a, meta);
+		medium_small(stack_a, stack_b, meta);
 		return ;
 	}
 	sorted = sort_array(*stack_a, size);
