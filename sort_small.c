@@ -91,26 +91,21 @@ static void	push_min(t_stack **st, t_stack **stack_b, t_meta *meta)
 void	complex_small(t_stack **st, t_stack **stack_b, t_meta *meta,
 	t_complex_meta *complex)
 {
-	if (complex->iterations == 3)
+	if (complex->len == 5)
 		push_min(st, stack_b, meta);
-	if (gt((*st)->content, ft_lstlast(*st)->content) && complex->iterations < 2)
+	if (lt((*st)->content, (*st)->next->content))
 		sa(st, meta);
-	if (complex->iterations > 1 && lt((*st)->content, (*st)->next->content))
+	ra(st, meta);
+	ra(st, meta);
+	if (gt((*st)->content, (*st)->next->content))
 		sa(st, meta);
-	if (complex->iterations >= 2)
-	{
-		ra(st, meta);
-		ra(st, meta);
-		if (complex->len > 3 && gt((*st)->content, (*st)->next->content))
-			sa(st, meta);
-		rra(st, meta);
-		if (gt((*st)->content, ft_lstlast(*st)->content))
-			sa(st, meta);
-		rra(st, meta);
-		if (gt((*st)->content, ft_lstlast(*st)->content))
-			sa(st, meta);
-		simple_small(st, meta);
-		if (complex->iterations == 3)
-			pa(st, stack_b, meta);
-	}
+	rra(st, meta);
+	if (gt((*st)->content, ft_lstlast(*st)->content))
+		sa(st, meta);
+	rra(st, meta);
+	if (gt((*st)->content, ft_lstlast(*st)->content))
+		sa(st, meta);
+	simple_small(st, meta);
+	if (complex->len == 5)
+		pa(st, stack_b, meta);
 }
